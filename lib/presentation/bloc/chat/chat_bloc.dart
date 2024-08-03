@@ -60,6 +60,7 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
     }
   }
 
+
   Future<void> _onSendMessage(
       SendMessage event, Emitter<ChatState> emit) async {
     try {
