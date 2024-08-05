@@ -141,6 +141,13 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget _buildFriendListWidget(BuildContext context) {
     return Expanded(
       child: BlocBuilder<FriendBloc, FriendState>(
+        buildWhen: (previous,current) {
+          // chỉ build khi danh sách bạn bè thay đổi
+          if(previous is FriendLoaded && current is FriendLoaded) {
+            return previous.filteredFriends != current.filteredFriends;
+          }
+          return true;
+        },
         builder: (context, state) {
           if (state is FriendLoading) {
             return const Center(child: CircularProgressIndicator());

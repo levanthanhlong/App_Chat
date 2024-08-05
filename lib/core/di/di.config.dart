@@ -13,12 +13,19 @@ import 'package:app_chat/data/data_sources/remote/api/api_service.dart'
     as _i1023;
 import 'package:app_chat/data/repositories_impl/auth_repository_impl.dart'
     as _i111;
+import 'package:app_chat/data/repositories_impl/friend_repository_impl.dart'
+    as _i151;
 import 'package:app_chat/data/repositories_impl/user_repository_impl.dart'
     as _i584;
 import 'package:app_chat/domain/repositories/auth_repository.dart' as _i410;
+import 'package:app_chat/domain/repositories/friend_repository.dart' as _i363;
 import 'package:app_chat/domain/repositories/user_repository.dart' as _i210;
 import 'package:app_chat/domain/use_case/auth/login_use_case.dart' as _i483;
 import 'package:app_chat/domain/use_case/auth/register_use_case.dart' as _i501;
+import 'package:app_chat/domain/use_case/friend/fetch_friends_use_case.dart'
+    as _i1006;
+import 'package:app_chat/domain/use_case/friend/update_nickname_use_case.dart'
+    as _i52;
 import 'package:app_chat/domain/use_case/user/check_user_use_case.dart'
     as _i251;
 import 'package:app_chat/domain/use_case/user/get_user_info_use_case.dart'
@@ -45,6 +52,8 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i833.UserMapper>(() => _i833.UserMapper());
     gh.lazySingleton<_i1023.ApiService>(() => _i1023.ApiService());
     gh.lazySingleton<_i210.UserRepository>(() => _i584.UserRepositoryImpl());
+    gh.lazySingleton<_i363.FriendRepository>(
+        () => _i151.FriendRepositoryImpl());
     gh.factory<_i131.LoadAvatarUseCase>(
         () => _i131.LoadAvatarUseCase(repository: gh<_i210.UserRepository>()));
     gh.factory<_i422.GetUserInfoUseCase>(
@@ -59,6 +68,10 @@ extension GetItInjectableX on _i174.GetIt {
           apiService: gh<_i1023.ApiService>(),
           userMapper: gh<_i833.UserMapper>(),
         ));
+    gh.factory<_i1006.FetchFriendsUseCase>(() =>
+        _i1006.FetchFriendsUseCase(repository: gh<_i363.FriendRepository>()));
+    gh.factory<_i52.UpdateNicknameUseCase>(() =>
+        _i52.UpdateNicknameUseCase(repository: gh<_i363.FriendRepository>()));
     gh.factory<_i501.RegisterUseCase>(
         () => _i501.RegisterUseCase(repository: gh<_i410.AuthRepository>()));
     gh.factory<_i483.LoginUseCase>(
